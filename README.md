@@ -107,6 +107,7 @@ These rules are automatically fixed when you run `xeolint fix`.
 | `missing_semantic_landmarks` | Missing `<main>`, `<nav>`, `<footer>` |
 | `missing_alt_text` | Images missing meaningful `alt` text |
 | `missing_json_ld` | No JSON-LD structured data found |
+| `client_only_content_risk` | Multi-signal detection of heavy client-side rendering risk |
 
 ### 🔵 Info (audit only)
 | Rule | What it checks |

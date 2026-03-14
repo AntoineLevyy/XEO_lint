@@ -18,6 +18,7 @@ from xeolint_core.rules.weak_entity_clarity import WeakEntityClarityRule
 from xeolint_core.rules.missing_faq import MissingFaqRule
 from xeolint_core.rules.orphan_risk import OrphanRiskInternalLinkingRule
 from xeolint_core.rules.generic_anchor_text import GenericAnchorTextRule
+from xeolint_core.rules.client_only_content_risk import ClientOnlyContentRiskRule
 
 ALL_RULES = [
     MissingRobotsTxtRule,
@@ -40,6 +41,7 @@ ALL_RULES = [
     MissingFaqRule,
     OrphanRiskInternalLinkingRule,
     GenericAnchorTextRule,
+    ClientOnlyContentRiskRule,
 ]
 
 __all__ = [
@@ -63,5 +65,6 @@ __all__ = [
     "MissingFaqRule",
     "OrphanRiskInternalLinkingRule",
     "GenericAnchorTextRule",
+    "ClientOnlyContentRiskRule",
     "ALL_RULES",
 ]
