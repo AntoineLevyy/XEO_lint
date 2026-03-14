@@ -41,11 +41,31 @@ pip install xeolint
 
 Navigate to the root of your Next.js project and run:
 
-### Audit
-The `audit` command statically analyzes your workspace and outputs a clean table of any GEO/SEO violations.
-
+### Audit (default — block format)
 ```bash
 xeolint audit .
+```
+
+Output:
+```
+ERROR  missing_title
+  File: src/pages/Terms.tsx
+  Message: No <title> found inside <Head> on this page route.
+  Fix: Inject a <title> element inside the Next.js <Head> component.
+
+WARNING  missing_canonical
+  File: src/pages/Terms.tsx
+  Message: No canonical URL defined for this page.
+  Fix: Add <link rel='canonical' href='...'> in <Head>.
+
+✅ Passed: missing_robots_txt, missing_sitemap, missing_h1, ...
+
+Summary: 5 errors · 9 warnings · 6 info · 12 passed
+```
+
+### Audit (table format)
+```bash
+xeolint audit . --table
 ```
 
 ### Fix
@@ -57,34 +77,49 @@ xeolint fix .
 
 ---
 
-## 📐 The Rules (V1)
-
-XEOLint is built to verify 20 critical checks.
+## 📐 The 20 Rules
 
 ### 🟢 Safe Auto-Fixes
-These rules can be automatically fixed when you run `xeolint fix`.
+These rules are automatically fixed when you run `xeolint fix`.
 
-*   `missing_robots_txt`: Ensures `robots.txt` or `app/robots.ts` exists so crawlers can index you.
-*   `missing_sitemap`: Ensures `sitemap.xml` or `app/sitemap.ts` exists for crawl efficiency.
+| Rule | What it checks |
+|------|---------------|
+| `missing_robots_txt` | `robots.txt` or `app/robots.ts` exists |
+| `missing_sitemap` | `sitemap.xml` or `app/sitemap.ts` exists |
 
-### 🟡 Conditional Auto-Fixes & 🟠 Suggestions
-These rules will trigger warnings during an `audit`, but are intentionally skipped by `fix` because they require human context or complex AST rewriting. The CLI outputs targeted "Suggested Fixes" allowing developers to easily paste the solution.
+### 🔴 Errors (audit only)
+| Rule | What it checks |
+|------|---------------|
+| `missing_title` | `<title>` or `metadata.title` is defined |
+| `missing_h1` | Page has an `<h1>` tag |
 
-*   `missing_title`: Checks if `<title>` or `metadata.title` is defined.
-*   `missing_meta_description`: Checks if `description` is defined in metadata.
-*   `missing_open_graph`: Checks if `openGraph` object is defined in metadata.
-*   `missing_twitter_card`: Checks if `twitter` object is defined in metadata.
-*   `client_only_critical_content`: Warns if heavy text blocks are hidden behind `"use client"`.
-*   `missing_h1` / `multiple_h1`: Analyzes your heading hierarchy.
-*   `missing_semantic_landmarks`: Warns if main wrappers are generic `<div>`s instead of `<main>`/`<section>`.
-*   `unclear_page_purpose`: Checks if your H1 and Hero copy provide a clear statement of purpose for LLMs.
-*   *...and many more.*
+### 🟡 Warnings (audit only)
+| Rule | What it checks |
+|------|---------------|
+| `missing_meta_description` | `description` is defined in metadata |
+| `missing_canonical` | Canonical URL is defined |
+| `missing_open_graph` | `openGraph` object in metadata |
+| `missing_twitter_card` | `twitter` object in metadata |
+| `page_noindex_risk` | Accidental `noindex` directives |
+| `client_only_critical_content` | Heavy text hidden behind `"use client"` |
+| `multiple_h1` | More than one `<h1>` on a page |
+| `weak_heading_hierarchy` | Heading levels are skipped (e.g. h1 → h3) |
+| `missing_semantic_landmarks` | Missing `<main>`, `<nav>`, `<footer>` |
+| `missing_alt_text` | Images missing meaningful `alt` text |
+| `missing_json_ld` | No JSON-LD structured data found |
+
+### 🔵 Info (audit only)
+| Rule | What it checks |
+|------|---------------|
+| `unclear_page_purpose` | H1/hero text is too vague for GEO |
+| `weak_entity_clarity` | Brand/product name missing from key areas |
+| `missing_faq_or_structured_qa` | No FAQ section or FAQ schema |
+| `orphan_risk_internal_linking` | Pages with no internal links pointing to them |
+| `generic_anchor_text` | "Click here" / "Learn more" style links |
 
 ---
 
 ## 🤝 Contributing
-
-XEOLint is heavily under development! We are actively building out the core rules engine and Next.js AST parsers. 
 
 ### Local Development
 1. Clone the repository.
