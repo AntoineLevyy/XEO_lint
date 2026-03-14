@@ -77,7 +77,7 @@ xeolint fix .
 
 ---
 
-## 📐 The 20 Rules
+## 📐 The 21 Rules
 
 ### 🟢 Safe Auto-Fixes
 These rules are automatically fixed when you run `xeolint fix`.
