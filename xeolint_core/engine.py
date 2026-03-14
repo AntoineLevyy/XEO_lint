@@ -28,7 +28,15 @@ class Engine:
     def audit_all(self) -> List[AuditResult]:
         """
         Runs the audit method on all registered rules.
+        Results are sorted by severity: ERROR > WARNING > INFO > PASS.
         """
+        LEVEL_ORDER = {
+            CheckLevel.ERROR: 0,
+            CheckLevel.WARNING: 1,
+            CheckLevel.INFO: 2,
+            CheckLevel.PASS: 3,
+        }
+
         context = self._build_context()
         all_results: List[AuditResult] = []
         for rule in self.rules:
@@ -44,7 +52,8 @@ class Engine:
                 ))
             else:
                 all_results.extend(rule_results)
-            
+        
+        all_results.sort(key=lambda r: LEVEL_ORDER.get(r.level, 99))
         return all_results
 
     def fix_all(self) -> List[FixResult]:
