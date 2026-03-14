@@ -7,14 +7,27 @@ name = "xeolint"
 version = "0.1.0"
 description = "A GEO and SEO linter and autofixer for Next.js applications"
 readme = "README.md"
+license = "MIT"
 authors = [
-    { name = "XEOLint Contributors" }
+    { name = "Antoine Levy" }
 ]
 requires-python = ">=3.9"
+keywords = ["seo", "geo", "nextjs", "linter", "generative-engine-optimization"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Quality Assurance",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+]
 dependencies = [
     "typer>=0.12.0",
     "rich>=13.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/AntoineLevyy/XEO_lint"
+Repository = "https://github.com/AntoineLevyy/XEO_lint"
 
 [project.scripts]
 xeolint = "xeolint_cli.main:app"
