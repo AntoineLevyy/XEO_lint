@@ -4,17 +4,19 @@ from rich.table import Table
 import os
 
 from xeolint_core import Engine
-from xeolint_core.rules import (
-    MissingRobotsTxtRule, 
-    MissingSitemapRule, 
-    MissingTitleRule,
-    MissingMetaDescriptionRule,
-    MissingOpenGraphRule,
-    MissingTwitterCardRule
-)
+from xeolint_core.rules import ALL_RULES
 
 app = typer.Typer(help="XEOLint: A GEO and SEO linter and autofixer for Next.js")
 console = Console()
+
+
+def _create_engine(target_path: str) -> Engine:
+    """Create an engine with all rules registered."""
+    engine = Engine(workspace_path=target_path)
+    for rule_cls in ALL_RULES:
+        engine.register_rule(rule_cls())
+    return engine
+
 
 @app.command()
 def audit(path: str = typer.Argument(".", help="Path to the Next.js project to audit")):
@@ -28,14 +30,7 @@ def audit(path: str = typer.Argument(".", help="Path to the Next.js project to a
         
     console.print(f"🔍 Auditing {target_path}...")
     
-    engine = Engine(workspace_path=target_path)
-    engine.register_rule(MissingRobotsTxtRule())
-    engine.register_rule(MissingSitemapRule())
-    engine.register_rule(MissingTitleRule())
-    engine.register_rule(MissingMetaDescriptionRule())
-    engine.register_rule(MissingOpenGraphRule())
-    engine.register_rule(MissingTwitterCardRule())
-    
+    engine = _create_engine(target_path)
     results = engine.audit_all()
     
     if not results:
@@ -94,14 +89,7 @@ def fix(path: str = typer.Argument(".", help="Path to the Next.js project to fix
     target_path = os.path.abspath(path)
     console.print(f"🛠️ Attempting auto-fixes on {target_path}...")
     
-    engine = Engine(workspace_path=target_path)
-    engine.register_rule(MissingRobotsTxtRule())
-    engine.register_rule(MissingSitemapRule())
-    engine.register_rule(MissingTitleRule())
-    engine.register_rule(MissingMetaDescriptionRule())
-    engine.register_rule(MissingOpenGraphRule())
-    engine.register_rule(MissingTwitterCardRule())
-    
+    engine = _create_engine(target_path)
     results = engine.fix_all()
     
     if not results:
