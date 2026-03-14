@@ -1,6 +1,6 @@
 <div align="center">
   <h1>🔍 XEOLint</h1>
-  <p><strong>A fast, deterministic GEO and SEO linter & autofixer for Next.js</strong></p>
+  <p><strong>Make your vibecoded project discoverable by LLMs and search engines</strong></p>
   <p>
     <a href="#philosophy">Philosophy</a> •
     <a href="#installation">Installation</a> •
@@ -13,14 +13,16 @@
 
 ## What is XEOLint?
 
-**XEOLint** is an ESLint-like tool built specifically for **Generative Engine Optimization (GEO)** and **SEO**. 
+Vibecoded projects ship fast — but they often ship with **discovery problems**. Missing meta tags, broken heading hierarchies, no structured data, and client-rendered content that crawlers can't see.
 
-As search evolves toward LLM-driven engines (like ChatGPT Search, Perplexity, and AI Overviews), structural clarity and machine-readability are more important than ever. XEOLint statically analyzes your Next.js project (supporting both the `app/` and `pages/` routers) to ensure your content is perfectly structured for both traditional crawlers and modern AI agents.
+**XEOLint** is a linter built to catch exactly these issues. It statically analyzes your Next.js project and tells you what's missing for **SEO** and **GEO** (Generative Engine Optimization) — so your site is discoverable by both traditional search engines and modern AI crawlers like ChatGPT Search, Perplexity, and AI Overviews.
 
-### ⚡ The V1 Philosophy
-- **"ESLint for Discoverability"**: Useful, deterministic, and narrowly focused.
+Supports both the `app/` and `pages/` routers. Audit-first, fix when safe.
+
+### ⚡ The Philosophy
+- **Built for vibecoded projects**: Catch the SEO/GEO mistakes that AI-assisted coding often misses.
 - **Audit-First**: Finds the missing metadata, broken hierarchies, and crawlability issues.
-- **Safe Autofixing**: Modifies your code *only* when the fix is deterministic and extremely low-risk (e.g., generating missing `robots.txt` or `sitemap.xml`).
+- **Safe Autofixing**: Modifies your code *only* when the fix is deterministic and low-risk.
 - **Deep Next.js Support**: Natively understands `export const metadata`, `"use client"` directives, and `<Head>` tags.
 
 ---

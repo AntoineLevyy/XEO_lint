@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "xeolint"
 version = "0.1.0"
-description = "A GEO and SEO linter and autofixer for Next.js applications"
+description = "Make your vibecoded project discoverable by LLMs and search engines. A GEO and SEO linter for Next.js."
 readme = "README.md"
 license = "MIT"
 authors = [
